@@ -36,7 +36,7 @@ public class TodoServiceTests {
   // 페이징 테스트
   public void testPaging() {
 
-    PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+    PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(3).size(10).build();
     PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
     log.info(responseDTO);
     responseDTO.getDtoList().stream().forEach(todoDTO -> log.info(todoDTO));
