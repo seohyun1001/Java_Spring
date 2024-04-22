@@ -48,20 +48,30 @@ public class TodoController {
   }
 
   @GetMapping({"/read","/modify"})
-  public void read(Long tno, Model model) {
+  public void read(Long tno, PageRequestDTO pageRequestDTO, Model model) {
+    // 화면에서 페이지를 정보를 전달하면
+    // 서버에서는 pageRequestDTO 타입으로 받아두겠다는 뜻
+    // 화면에서 pageRequestDTO를 사용하기
     model.addAttribute("dto",todoService.getOne(tno));
   }
 
+  // 기존에 URL 파라미터를 사용하는 메서드 방식은 get 방식이었고
+  // post는 폼에 히든으로 숨겨서 전달함
   @PostMapping("/remove")
-  public String remove(Long tno, RedirectAttributes redirectAttributes) {
+  public String remove(Long tno, PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
     log.info("-----------------remove-------------------");
     log.info("tno:"+tno);
     todoService.remove(tno);
+
+    // 페이지와 사이즈 정보를 화면에 전달하기
+    redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+    redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
     return "redirect:/todo/list";
   }
 
     @PostMapping("/modify")
     public String modify(@Valid TodoDTO dto,
+                         PageRequestDTO pageRequestDTO,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
       if(bindingResult.hasErrors()){
@@ -71,6 +81,9 @@ public class TodoController {
         return "redirect:/todo/modify";
       }
       todoService.modify(dto);
+      // 페이지, 사이즈 정보를 화면에 전달하기.
+      redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+      redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
       return "redirect:/todo/list";
     }
 

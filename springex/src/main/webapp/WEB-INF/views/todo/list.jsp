@@ -61,7 +61,7 @@
                             <c:forEach items="${responseDTO.dtoList}" var="dto">
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"/></th>
-                                    <td><a href="/todo/read?tno=${dto.tno}" class="text-decoration-none"><c:out value="${dto.title}"/></a></td>
+                                    <td><a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none" data-tno="${dto.tno}"><c:out value="${dto.title}"/></a></td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>
                                     <td><c:out value="${dto.finished}"/></td>
@@ -90,6 +90,7 @@
                                 </c:if>
                             </ul>
                         </div>
+
                         <script>
                             // 클래스 명 : pagination 이용해서, 요소를 선택 하고
                             // 이벤트 핸들러를 추가함.
