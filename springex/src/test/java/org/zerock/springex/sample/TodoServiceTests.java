@@ -34,11 +34,17 @@ public class TodoServiceTests {
 
   @Test
   // 페이징 테스트
+  // 화면에서, page=1&size=10 , 받으면,
+  // 서버에서, 계산하고, 결과로, 1)페이지당 게시글 10개, 2) 전체 게시글 수 3)PageRequestDTO 반환.
   public void testPaging() {
-
+    // 화면에서 전달 받은 파라미터 값
     PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(3).size(10).build();
+
+    // 서버에서 계산하는 테스트
     PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
     log.info(responseDTO);
+
+    // 10개의 게시글 순회해서, 하나씩 확인 해보기.
     responseDTO.getDtoList().stream().forEach(todoDTO -> log.info(todoDTO));
 
 

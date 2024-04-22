@@ -75,21 +75,47 @@
                             <ul class="pagination flex-wrap">
                                 <c:if test="${responseDTO.prev}">
                                     <li class="page-item">
-                                        <a class="page-link">Previous</a>
+                                        <a class="page-link" data-num="${responseDTO.start - 1}">이전</a>
                                     </li>
                                 </c:if>
 
                                 <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
-                                    <li class="page-item"><a href="#" class="page-link">${num}</a></li>
+                                    <li class="page-item ${responseDTO.page == num ? "active" : ""}"><a  class="page-link" data-num="${num}">${num}</a></li>
                                 </c:forEach>
 
                                 <c:if test="${responseDTO.next}">
                                     <li class="page-item">
-                                        <a class="page-link">Next</a>
+                                        <a class="page-link" data-num="${responseDTO.end + 1}">다음</a>
                                     </li>
                                 </c:if>
                             </ul>
                         </div>
+                        <script>
+                            // 클래스 명 : pagination 이용해서, 요소를 선택 하고
+                            // 이벤트 핸들러를 추가함.
+                            document.querySelector(".pagination").addEventListener("click", function (e){
+                                e.preventDefault()
+                                e.stopPropagation()
+
+                                const target = e.target
+
+                                // tagName 이름이 A 가 아니라면 함수를 나가고
+                                if (target.tagName !== 'A'){
+                                    return
+                                }
+                                // 현재 페이지의 번호를 가지고 오기.
+                                const num = target.getAttribute("data-num")
+
+                                // 해ekd 페이지로 이동하기.
+                                // 스프링의 벡엔드 서버에 호출하면, 서버가 응답해서,
+                                // 해당 페이지로 리다이렉트 함. page 값과, size 을가지고
+                                // 정확히 하면 PageRequestDTO에 담아서 호출하고,
+                                // 서버는 PageResponseDTO에 담아서 화면에 보내고,
+                                // 화면은 해당 인스턴스 이용해서, 화면에 출력하는 형식.
+                                self.location = `/todo/list?page=\${num}`
+                            }, false)
+
+                        </script>
 
                     </div>
                 </div>
