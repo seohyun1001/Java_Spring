@@ -107,7 +107,7 @@
                                 // 현재 페이지의 번호를 가지고 오기.
                                 const num = target.getAttribute("data-num")
 
-                                // 해ekd 페이지로 이동하기.
+                                // 해당 페이지로 이동하기.
                                 // 스프링의 벡엔드 서버에 호출하면, 서버가 응답해서,
                                 // 해당 페이지로 리다이렉트 함. page 값과, size 을가지고
                                 // 정확히 하면 PageRequestDTO에 담아서 호출하고,
