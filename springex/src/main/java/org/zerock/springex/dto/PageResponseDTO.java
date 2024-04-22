@@ -32,6 +32,28 @@ public class PageResponseDTO <E>{
 
         this.total = total;
         this.dtoList = dtoList;
+
+        // end 페이지 먼저 계산하기
+        // 예) 1페이지를 10으로 나누면 0.1이 됨
+        // -> 0.1을 올림을 하면 1이 되고
+        // -> *10을 하면 끝 페이지가 10이 됨
+        // 예) 11페이지 / 10 = 1.1 -> 올림 = 2 * 10 = 20
+        // 예) 2페이지 / 10 = 0.2 -> 올림 = 1 * 10 = 10
+        // 예) 21페이지 / 10 = 2.1 -> 올림 = 3 * 10 = 30
+        this.end = (int)(Math.ceil(this.page / 10.0)) * 10;
+
+
+        // start 페이지 계산하기
+        // 예) end = 30, start = 30 - 9 = 21
+        // 예) end = 20, start = 20 - 9 = 11
+        this.start = this.end - 9;
+
+        // last
+        int last = (int)(Math.ceil((total/(double)size)));
+        this.end = end > last ? last : end;
     }
+
+    // end 페이지 계산
+
 
 }
