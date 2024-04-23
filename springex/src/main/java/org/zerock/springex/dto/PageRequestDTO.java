@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import javax.ws.rs.core.Link;
+import java.time.LocalDate;
 
 @Builder
 @Data
@@ -29,9 +30,17 @@ public class PageRequestDTO {
     @Min(value = 10)
     @Max(value = 100)
     @Positive
+
     private int size = 10;
 
     private String link;
+
+    // 검색/필터링을 위한 변수들(5개)
+    private String[] types;
+    private String keyword;
+    private boolean finished;
+    private LocalDate from;
+    private LocalDate to;
 
     public int getSkip() {
         return (page - 1) * size;
