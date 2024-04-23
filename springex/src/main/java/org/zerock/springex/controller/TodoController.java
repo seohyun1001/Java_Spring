@@ -64,9 +64,9 @@ public class TodoController {
     todoService.remove(tno);
 
     // 페이지와 사이즈 정보를 화면에 전달하기
-    redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
-    redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
-    return "redirect:/todo/list";
+//    redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+//    redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
+    return "redirect:/todo/list?" + pageRequestDTO.getLink();
   }
 
     @PostMapping("/modify")

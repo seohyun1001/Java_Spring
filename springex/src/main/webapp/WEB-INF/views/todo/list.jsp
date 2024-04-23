@@ -41,7 +41,7 @@
                             <div class="input-group mb-3">
                                 <div class="float-end">
                                     <button class="btn btn-primary" type="submit">Search</button>
-                                    <button class="btn btn-primary" type="reset">Clear</button>
+                                    <button class="btn btn-info clearBtn" type="reset">Clear</button>
                                 </div>
                             </div>
                         </form>
@@ -151,19 +151,26 @@
                                 // 정확히 하면 PageRequestDTO에 담아서 호출하고,
                                 // 서버는 PageResponseDTO에 담아서 화면에 보내고,
                                 // 화면은 해당 인스턴스 이용해서, 화면에 출력하는 형식.
-                                self.location = `/todo/list?page=\${num}`
+                                // self.location = `/todo/list?page=\${num}`
+
+                                const formObj = document.querySelector("form")
+                                formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+                                formObj.submit();
+                            }, false)
+
+                            document.querySelector(".clearBtn").addEventListener("click", function (e){
+                                e.preventDefault()
+                                e.stopPropagation()
+                                self.location = '/todo/list'
                             }, false)
 
                         </script>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row content">
-        <h1>Content</h1>
-    </div>
+
     <div class="row footer">
         <%--        <h1>Footer</h1>--%>
         <div class="row fixed-bottom" style="z-index:-100">
