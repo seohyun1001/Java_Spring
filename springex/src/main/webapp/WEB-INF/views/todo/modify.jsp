@@ -98,12 +98,15 @@
                                 formObj.method="post"
                                 formObj.submit()
                             }, false)
+
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){
                                 e.preventDefault()
                                 e.stopPropagation()
                                 self.location = `/todo/list?${pageRequestDTO.link}`
                             }, false)
+
                             const formObj = document.querySelector("form")
+
                             document.querySelector(".btn-danger").addEventListener("click",function(e){
                                 e.preventDefault()
                                 e.stopPropagation()

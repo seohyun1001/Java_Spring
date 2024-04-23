@@ -64,6 +64,7 @@ public class TodoMapperTests {
 
     List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
     voList.forEach(vo -> log.info(vo));
+    log.info(todoMapper.getCount(pageRequestDTO));
   }
 }
 

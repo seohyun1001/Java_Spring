@@ -84,7 +84,7 @@ public class TodoController {
       // 페이지, 사이즈 정보를 화면에 전달하기.
       redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
       redirectAttributes.addAttribute("size", pageRequestDTO.getSize());
-      return "redirect:/todo/list";
+      return "redirect:/todo/read";
     }
 
 //  @RequestMapping(value = "/register", method= RequestMethod.GET)
