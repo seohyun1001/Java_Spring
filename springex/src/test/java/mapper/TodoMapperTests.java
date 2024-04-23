@@ -55,6 +55,7 @@ public class TodoMapperTests {
             .size(10)
             .types(new String[]{"t", "w"})
             .keyword("스프링")
+
 //            .finished(true)
             .from(LocalDate.of(2024, 04, 23))
             .to(LocalDate.of(2024, 04, 25))
